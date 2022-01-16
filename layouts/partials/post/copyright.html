@@ -1,11 +1,13 @@
 {{ if or .Params.postMetaInFooter (and .Site.Params.postMetaInFooter (ne .Params.postMetaInFooter false)) -}}
 <div class="post-copyright">
   <p class="copyright-item">
-    <span class="item-title">{{ T "author" }}</span>
+    <!-- <span class="item-title">{{ T "author" }}</span> -->
+    <span class="item-title">{{ "本文作者" }}</span>
     <span class="item-content">{{ if .Params.author }}{{ .Params.author | safeHTML }}{{ else }}{{ .Site.Author.name | safeHTML }}{{ end }}</span>
   </p>
   <p class="copyright-item">
-    <span class="item-title">{{ T "lastMod" }}</span>
+    <!-- <span class="item-title">{{ T "lastMod" }}</span> -->
+    <span class="item-title">{{ "上次修改" }}</span>
     <span class="item-content">
         {{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
         {{ with .GitInfo }}<a href="{{ $.Site.Params.gitRepo }}/commit/{{ .Hash }}" title="{{ .Subject }}">({{ .AbbreviatedHash }})</a>{{ end }}
@@ -14,14 +16,25 @@
   {{ if $.Site.Params.linkToMarkDown -}}
     {{ with $.OutputFormats.Get "markdown" -}}
     <p class="copyright-item">
-      <span class="item-title">{{ T "markdown" }}</span>
+      <!-- <span class="item-title">{{ T "markdown" }}</span> -->
+      <span class="item-title">{{ "原始文件" }}</span>
       <span class="item-content"><a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">{{ T "seeMarkDown" }}</a></span>
     </p>
     {{- end }}
   {{- end }}
+  <p class="copyright-item">
+    <span class="item-title">{{ "技术声明" }}</span>
+    <span class="item-content">
+    {{- if .Params.techContent -}}
+      {{ .Params.techContent | safeHTML }}
+    {{- else -}}
+      {{ .Site.Params.techContent | safeHTML }}
+    {{- end -}}
+    </span>
+  </p>
   {{ if or .Params.contentCopyright (and .Site.Params.contentCopyright (ne .Params.contentCopyright false)) -}}
   <p class="copyright-item">
-    <span class="item-title">{{ T "license" }}</span>
+    <span class="item-title">{{ "版权声明" }}</span>
     <span class="item-content">
     {{- if .Params.contentCopyright -}}
       {{ .Params.contentCopyright | safeHTML }}
