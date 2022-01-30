@@ -2,3 +2,6 @@ node_modules/
 .idea/
 *.iml
 exampleSite/resources/
+
+# add by zzkcode
+.DS_Store
